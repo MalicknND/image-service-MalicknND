@@ -28,7 +28,7 @@ class BDDService {
   async getUserImages(userId, options = {}) {
     try {
       const { page = 1, limit = 10, status } = options;
-      let url = `${this.baseUrl}/api/images/user/${userId}?page=${page}&limit=${limit}`;
+      let url = `${this.baseUrl}/api/images?userId=${userId}&page=${page}&limit=${limit}`;
 
       if (status) {
         url += `&status=${status}`;

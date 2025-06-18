@@ -7,6 +7,19 @@ const imageController = require("../controllers/imageController");
 const router = express.Router();
 
 /**
+ * @route GET /api/health
+ * @desc Vérifier la santé du service
+ * @access Public
+ */
+router.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "Service Images opérationnel",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+/**
  * @route POST /api/images
  * @desc Créer une nouvelle image (stockage d'une image générée par l'IA)
  * @access Private
