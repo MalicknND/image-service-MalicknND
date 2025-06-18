@@ -44,16 +44,16 @@ class ImageController {
 
       const image = bddResponse.data;
 
-      logger.info(`Image créée avec succès: ${image.image_id}`);
+      logger.info(`Image créée avec succès: ${image.id}`);
 
       res.status(201).json({
         success: true,
         data: {
-          image_id: image.image_id,
+          image_id: image.id,
           user_id: userId,
           prompt,
           image_url: imageUrl,
-          created_at: image.created_at,
+          created_at: image.createdAt,
           status: "generated",
           metadata,
         },
