@@ -72,17 +72,24 @@ class ImageController {
       const userId = req.user.id;
       const { page = 1, limit = 10, status } = req.query;
 
+      logger.info(`Récupération des images pour l'utilisateur ${userId}`);
+
       const bddResponse = await this.bddService.getUserImages(userId, {
-        page,
-        limit,
+        page: parseInt(page),
+        limit: parseInt(limit),
         status,
       });
 
       logger.info(
-        `Images récupérées pour l'utilisateur ${userId}: ${bddResponse.data.images.length}`
+        `Images récupérées pour l'utilisateur ${userId}: ${
+          bddResponse.data?.images?.length || 0
+        }`
       );
 
-      res.json(bddResponse);
+      res.json({
+        success: true,
+        data: bddResponse.data || { images: [], pagination: { total: 0 } },
+      });
     } catch (error) {
       logger.error(`Erreur récupération images: ${error.message}`);
       next(error);
